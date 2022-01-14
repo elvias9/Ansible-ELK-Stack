@@ -1,0 +1,16 @@
+---
+- hosts: elasticsearch
+  become: yes
+  tasks:
+    - name: Setup ElasticSearch
+      include_tasks: elasticsearch.yml
+- hosts: logstash
+  become: yes
+  tasks:
+    - name: Setup Logstash
+      include_tasks: logstash.yml
+- hosts: kibana
+  become: yes
+  tasks:
+    - name: Setup Kibana
+      include_tasks: kibana.yml
