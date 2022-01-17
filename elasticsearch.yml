@@ -26,11 +26,11 @@
   apt:
     deb: /tmp/elasticsearch-7.6.2-amd64.deb
     
-- name: Update Elastic Config (IP Address to 0.0.0.0)
+- name: Update Elastic Config (IP Address to localhost)
   lineinfile:
     destfile: /etc/elasticsearch/elasticsearch.yml
     regexp: 'network.host'
-    line: 'network.host: 0.0.0.0'
+    line: 'network.host: _local_'
     
 - name: Updating Elastic Config (Port Number)
   lineinfile:
@@ -53,6 +53,13 @@
   service:
     name: elasticsearch
     state: started
+    
+- name: check Elasticsearch
+  shell: curl localhost:9200
+  register: command_output
+
+- debug:
+    var: command_output.stdout_lines
 
 
 
