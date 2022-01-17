@@ -1,4 +1,14 @@
 ---
+- hosts: apache
+  become: yes
+  tasks:
+    - name: Setup Beats on Apache Server
+      include_tasks: apache.yml
+# - hosts: syslog
+#   become: yes
+#   tasks:
+#     - name: Setup Beats on Syslog Server
+#       include_tasks: syslog.yml
 - hosts: elasticsearch
   become: yes
   tasks:
@@ -9,8 +19,8 @@
   tasks:
     - name: Setup Logstash
       include_tasks: logstash.yml
-- hosts: kibana
-  become: yes
-  tasks:
-    - name: Setup Kibana
-      include_tasks: kibana.yml
+# - hosts: kibana
+#   become: yes
+#   tasks:
+#     - name: Setup Kibana
+#       include_tasks: kibana.yml
