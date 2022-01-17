@@ -1,0 +1,6 @@
+elasticsearch_ip: "{{ lookup('file', 'elasticsearch-ip.txt') }}"
+logstash_ip: "{{ lookup('file', 'logstash-ip.txt') }}"
+kibana_ip: "{{ lookup('file', 'kibana-ip.txt') }}"
+apache_ip: "{{ lookup('file', 'apache-ip.txt') }}"
+syslog_ip: "{{ lookup('file', 'syslog-ip.txt') }}"
+bastion_ip: "{{ lookup('file', 'kibana-ip.txt') }}"
