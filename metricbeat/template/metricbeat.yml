@@ -142,7 +142,7 @@ permissions: {{ logging_file_permissions }}
 # reporting is disabled by default.
 
 # Set to true to enable the monitoring reporter.
-monitoring.enabled: true
+#monitoring.enabled: true
 
 # Sets the UUID of the Elasticsearch cluster under which monitoring data for this
 # Metricbeat instance will appear in the Stack Monitoring UI. If output.elasticsearch
@@ -156,7 +156,7 @@ monitoring.enabled: true
 # output configuration, so if you have the Elasticsearch output configured such
 # that it is pointing to your Elasticsearch monitoring cluster, you can simply
 # uncomment the following line.
-monitoring.elasticsearch:
+#monitoring.elasticsearch:
 
 # ================================= Migration ==================================
 
