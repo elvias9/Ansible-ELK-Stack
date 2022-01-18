@@ -1,3 +1,4 @@
+#Syslog
 ---
 - name: Import a key from a url
   rpm_key:
@@ -31,7 +32,7 @@
         filebeat.inputs:
         - type: log
           paths:
-          - /var/log/*.log
+          - /var/log/httpd/*_log
         output.logstash:
           hosts: ["{{ logstash_ip }}:5044"]
   
@@ -59,10 +60,3 @@
     name: metricbeat
     enabled: yes
     state: started
-
-# - name: Enable the metricbeat systemd service
-#   systemd:
-#     name: metricbeat
-#     enabled: yes
-#     state: started
-#     daemon_reload: yes
