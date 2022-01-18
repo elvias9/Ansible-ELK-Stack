@@ -52,8 +52,9 @@
 - name: Start ElasticSearch Service
   service:
     name: elasticsearch
+    enabled: yes
     state: started
-    
+
 - name: check Elasticsearch
   shell: curl localhost:9200
   register: command_output
