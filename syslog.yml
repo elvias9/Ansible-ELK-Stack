@@ -59,10 +59,3 @@
     name: metricbeat
     enabled: yes
     state: started
-
-# - name: Enable the metricbeat systemd service
-#   systemd:
-#     name: metricbeat
-#     enabled: yes
-#     state: started
-#     daemon_reload: yes
