@@ -1,6 +1,15 @@
 ---
+    - name: update apt cache 
+      apt: 
+        update_cache: yes
+        force_apt_get: yes
+        cache_valid_time: 3600
+    - name: install java runtime
+      apt: 
+        name: default-jre
+        purge: yes
+        state: present
 
-tasks:
     - name: Download Logstash Deb Package
       get_url:
         url: https://artifacts.elastic.co/downloads/logstash/logstash-7.6.2.deb
@@ -32,3 +41,9 @@ tasks:
              elasticsearch { hosts => ["{{ elasticsearch_ip }}:9200"]
              }
            }
+
+    - name: Start Logstash Service
+      service:
+        name: logstash
+        enabled: yes
+        state: started
