@@ -93,7 +93,7 @@ setup.kibana:
   #password: "changeme"
 
 # ------------------------------ Logstash Output -------------------------------
-#output.logstash:
+output.logstash:
   # The Logstash hosts
   hosts: ["{{ logstash_ip }}:5044"]
 
