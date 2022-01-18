@@ -30,12 +30,14 @@
       become: yes
       blockinfile:
          path: /etc/logstash/conf.d/main.conf
-         marker: ""
+         marker: " ## {mark} add pipeline"
          block: |
            input {
-             beats {
-               port => 5044
-             }
+              beats {
+                port => 5044
+                ssl => false
+                ssl_verify_mode => "none"
+              } 
            }
            output {
              elasticsearch { hosts => ["{{ elasticsearch_ip }}:9200"]
