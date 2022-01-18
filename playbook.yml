@@ -1,9 +1,9 @@
 ---
-# - hosts: apache
-#   become: yes
-#   tasks:
-#     - name: Setup Beats on Apache Server
-#       include_tasks: apache.yml
+- hosts: apache
+  become: yes
+  tasks:
+    - name: Setup Beats on Apache Server
+      include_tasks: apache.yml
 - hosts: syslog
   become: yes
   tasks:
