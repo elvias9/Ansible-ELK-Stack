@@ -19,12 +19,12 @@
 
 - name: Download Elastic Deb Package
   get_url:
-    url: https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.6.2-amd64.deb
+    url: https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.16.3-amd64.deb
     dest: /tmp
 
 - name: Install Elastic Deb Package
   apt:
-    deb: /tmp/elasticsearch-7.6.2-amd64.deb
+    deb: /tmp/elasticsearch-7.16.3-amd64.deb
     
 - name: Update Elastic Config (IP Address to localhost)
   lineinfile:
@@ -53,10 +53,10 @@
   service:
     name: elasticsearch
     enabled: yes
-    state: started
+    state: restarted
 
 - name: check Elasticsearch
-  shell: curl localhost:9200
+  shell: curl {{ elasticsearch_ip }}:9200
   register: command_output
 
 - debug:
