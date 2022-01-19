@@ -1,0 +1,51 @@
+---
+    - name: update apt cache 
+      apt: 
+        update_cache: yes
+        force_apt_get: yes
+        cache_valid_time: 3600
+    - name: install java runtime
+      apt: 
+        name: default-jre
+        purge: yes
+        state: present
+
+    - name: Download Logstash Deb Package
+      get_url:
+        url: https://artifacts.elastic.co/downloads/logstash/logstash-7.6.2.deb
+        dest: /tmp
+    
+    - name: Install Logstash Deb Package
+      become: yes
+      apt:
+        deb: /tmp/logstash-7.6.2.deb
+
+    - name: Create Logstash Pipeline File
+      become: yes
+      file:
+         path: /etc/logstash/conf.d/main.conf
+         state: touch
+
+    - name: Add Logstash Pipeline Configuration
+      become: yes
+      blockinfile:
+         path: /etc/logstash/conf.d/main.conf
+         marker: " ## {mark} add pipeline"
+         block: |
+           input {
+              beats {
+                port => 5044
+                ssl => false
+                ssl_verify_mode => "none"
+              } 
+           }
+           output {
+             elasticsearch { hosts => ["{{ elasticsearch_ip }}:9200"]
+             }
+           }
+
+    - name: Start Logstash Service
+      service:
+        name: logstash
+        enabled: yes
+        state: started

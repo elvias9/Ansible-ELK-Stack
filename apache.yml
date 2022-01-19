@@ -1,0 +1,62 @@
+#Syslog
+---
+- name: Import a key from a url
+  rpm_key:
+    state: present
+    key: https://packages.elastic.co/GPG-KEY-elasticsearch
+- name: Copy elastic repo
+  template:
+    src: repo/elastic.repo
+    dest: /etc/yum.repos.d/
+    owner: root
+    group: root
+- name: Yum Install Filebeat
+  yum:
+    name: filebeat
+    state: present
+- name: Remove FileBeat YAML File
+  file:
+    path: /etc/filebeat/filebeat.yml
+    state: absent
+
+- name: Create New FileBeat YAML File
+  file:
+    path: /etc/filebeat/filebeat.yml
+    state: touch
+
+- name: Add FileBeat YAML Configuration
+  blockinfile:
+    path: /etc/filebeat/filebeat.yml
+    marker: ""
+    block: |
+        filebeat.inputs:
+        - type: log
+          paths:
+          - /var/log/httpd/*_log
+        output.logstash:
+          hosts: ["{{ logstash_ip }}:5044"]
+  
+- name: Start FileBeat Service
+  service:
+    name: filebeat
+    state: started
+
+- name: Enabled FileBeat Service
+  service:
+    name: filebeat
+    enabled: yes
+- name: Yum Install MetricBeat
+  yum:
+    name: metricbeat
+    state: present
+
+- name: Replace default metricbeat configuration file
+  template: 
+   src: metricbeat/template/metricbeat.yml
+   dest: /etc/metricbeat/metricbeat.yml
+
+- name: Enable the metricbeat systemd service
+  service:
+    name: metricbeat
+    enabled: yes
+    state: started
