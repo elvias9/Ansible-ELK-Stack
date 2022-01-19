@@ -49,7 +49,7 @@ jobs:
         shell: bash
 
       - name: Print tests
-        run: cat ssh.config
+        run: ls -la ~/.ssh/ && cat ~/.ssh/Team1KeyPair.pem
 
       # - name: Add Github Actions IP to Security group
       #   run: |
