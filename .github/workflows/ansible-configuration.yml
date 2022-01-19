@@ -48,9 +48,6 @@ jobs:
           ./fetch-ips.sh
         shell: bash
 
-      - name: Print tests
-        run: ls -la ~/.ssh/ && cat ~/.ssh/Team1KeyPair.pem
-
       # - name: Add Github Actions IP to Security group
       #   run: |
       #     aws ec2 authorize-security-group-ingress --group-id ${{ env.AWS_SG_ID }} --protocol tcp --port 22 --cidr ${{ steps.ip.outputs.ipv4 }}/32    
@@ -58,6 +55,9 @@ jobs:
       #     AWS_ACCESS_KEY_ID: ${{ env.AWS_ACCESS_KEY_ID }}
       #     AWS_SECRET_ACCESS_KEY: ${{ env.AWS_SECRET_ACCESS_KEY }}
       #     AWS_DEFAULT_REGION: ${{ env.AWS_DEFAULT_REGION }}
+
+      - name: Run Playbooks
+        run: ansible-playbook playbook.yml
 
       - name: Run Ansible playbook
         uses: dawidd6/action-ansible-playbook@v2.5.0
