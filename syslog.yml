@@ -31,7 +31,7 @@
         filebeat.inputs:
         - type: log
           paths:
-          - /var/log/*.log
+          - /var/log/*
         output.logstash:
           hosts: ["{{ logstash_ip }}:5044"]
   
