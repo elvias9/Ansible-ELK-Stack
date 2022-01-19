@@ -9,10 +9,12 @@ BASTION=`aws ec2 describe-instances --filters "Name=tag:Name, Values=Kibana" | j
 cat <<EOF > ssh.config
 Host $BASTION
 	Hostname $BASTION
+	StrictHostKeyChecking no
 	Port 22
 	User ubuntu
 	IdentityFile ~/.ssh/Team1KeyPair.pem
 
 Host 10.10.*.*
 	ProxyJump $BASTION
+	StrictHostKeyChecking no
 	IdentityFile ~/.ssh/Team1KeyPair.pem
