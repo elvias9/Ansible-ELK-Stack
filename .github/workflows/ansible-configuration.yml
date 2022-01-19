@@ -57,7 +57,7 @@ jobs:
           AWS_DEFAULT_REGION: ${{ env.AWS_DEFAULT_REGION }}
 
       - name: Run Playbooks
-        run: ansible-playbook playbook.yml -vvvv
+        run: ansible-playbook playbook.yml -vvvvv
 
       - name: Run Ansible playbook
         uses: dawidd6/action-ansible-playbook@v2.5.0
