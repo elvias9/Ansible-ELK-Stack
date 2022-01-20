@@ -40,8 +40,11 @@
               } 
            }
            output {
-             elasticsearch { hosts => ["{{ elasticsearch_ip }}:9200"]
+             elasticsearch { 
+               hosts => ["{{ elasticsearch_ip }}:9200"]
+               index => “logstash-%{+YYYY.MM.dd}”
              }
+             stdout { codec => rubydebug }
            }
 
     - name: Start Logstash Service
