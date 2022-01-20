@@ -11,12 +11,6 @@
     purge: yes
     state: present
 
-# - name: Set Java home
-#   shell: sudo echo "JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64" >> /etc/environment
-
-# - name: export Java home
-#   shell: export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64 
-
 - name: Download Elastic Deb Package
   get_url:
     url: https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.16.3-amd64.deb
